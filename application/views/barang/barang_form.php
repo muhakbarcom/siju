@@ -15,10 +15,6 @@
             <div class="box-body">
         <form action="<?php echo $action; ?>" method="post">
 	    <div class="form-group">
-            <label for="int">Kode Barang <?php echo form_error('kode_barang') ?></label>
-            <input type="text" class="form-control" name="kode_barang" id="kode_barang" placeholder="Kode Barang" value="<?php echo $kode_barang; ?>" />
-        </div>
-	    <div class="form-group">
             <label for="int">Nama Barang <?php echo form_error('nama_barang') ?></label>
             <input type="text" class="form-control" name="nama_barang" id="nama_barang" placeholder="Nama Barang" value="<?php echo $nama_barang; ?>" />
         </div>
@@ -30,7 +26,7 @@
             <label for="int">Stok Barang <?php echo form_error('stok_barang') ?></label>
             <input type="text" class="form-control" name="stok_barang" id="stok_barang" placeholder="Stok Barang" value="<?php echo $stok_barang; ?>" />
         </div>
-	    <input type="hidden" name="" value="<?php echo $; ?>" /> 
+	    <input type="hidden" name="kode_barang" value="<?php echo $kode_barang; ?>" /> 
 	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
 	    <a href="<?php echo site_url('barang') ?>" class="btn btn-default">Cancel</a>
 	</form>

@@ -47,7 +47,6 @@
             <tr>
                 <th style="width: 10px;"><input type="checkbox" name="selectall" /></th>
                 <th>No</th>
-		<th>Kode Barang</th>
 		<th>Nama Barang</th>
 		<th>Harga Barang</th>
 		<th>Quantity</th>
@@ -61,10 +60,9 @@
                 ?>
                 <tr>
                 
-		<td  style="width: 10px;padding-left: 8px;"><input type="checkbox" name="id" value="<?= $transaksi->;?>" />&nbsp;</td>
+		<td  style="width: 10px;padding-left: 8px;"><input type="checkbox" name="id" value="<?= $transaksi->kode_barang;?>" />&nbsp;</td>
                 
 			<td width="80px"><?php echo ++$start ?></td>
-			<td><?php echo $transaksi->kode_barang ?></td>
 			<td><?php echo $transaksi->nama_barang ?></td>
 			<td><?php echo $transaksi->harga_barang ?></td>
 			<td><?php echo $transaksi->quantity ?></td>
@@ -73,11 +71,11 @@
 			<td><?php echo $transaksi->pendapatan ?></td>
 			<td style="text-align:center" width="200px">
 				<?php 
-				echo anchor(site_url('transaksi/read/'.$transaksi->),'<i class="fa fa-search"></i>', 'class="btn btn-xs btn-primary"  data-toggle="tooltip" title="Detail"'); 
+				echo anchor(site_url('transaksi/read/'.$transaksi->kode_barang),'<i class="fa fa-search"></i>', 'class="btn btn-xs btn-primary"  data-toggle="tooltip" title="Detail"'); 
 				echo ' '; 
-				echo anchor(site_url('transaksi/update/'.$transaksi->),' <i class="fa fa-edit"></i>', 'class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit"'); 
+				echo anchor(site_url('transaksi/update/'.$transaksi->kode_barang),' <i class="fa fa-edit"></i>', 'class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit"'); 
 				echo ' '; 
-				echo anchor(site_url('transaksi/delete/'.$transaksi->),' <i class="fa fa-trash"></i>','class="btn btn-xs btn-danger" onclick="javasciprt: return confirmdelete(\'transaksi/delete/'.$transaksi->.'\')"  data-toggle="tooltip" title="Delete" '); 
+				echo anchor(site_url('transaksi/delete/'.$transaksi->kode_barang),' <i class="fa fa-trash"></i>','class="btn btn-xs btn-danger" onclick="javasciprt: return confirmdelete(\'transaksi/delete/'.$transaksi->kode_barang.'\')"  data-toggle="tooltip" title="Delete" '); 
 				?>
 			</td>
 		</tr>

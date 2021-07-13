@@ -15,10 +15,6 @@
             <div class="box-body">
         <form action="<?php echo $action; ?>" method="post">
 	    <div class="form-group">
-            <label for="int">Kode Transaksi <?php echo form_error('kode_transaksi') ?></label>
-            <input type="text" class="form-control" name="kode_transaksi" id="kode_transaksi" placeholder="Kode Transaksi" value="<?php echo $kode_transaksi; ?>" />
-        </div>
-	    <div class="form-group">
             <label for="int">Jumlah Transaksi <?php echo form_error('jumlah_transaksi') ?></label>
             <input type="text" class="form-control" name="jumlah_transaksi" id="jumlah_transaksi" placeholder="Jumlah Transaksi" value="<?php echo $jumlah_transaksi; ?>" />
         </div>
@@ -30,7 +26,7 @@
             <label for="int">Kode Dtl Transaksi <?php echo form_error('kode_dtl_transaksi') ?></label>
             <input type="text" class="form-control" name="kode_dtl_transaksi" id="kode_dtl_transaksi" placeholder="Kode Dtl Transaksi" value="<?php echo $kode_dtl_transaksi; ?>" />
         </div>
-	    <input type="hidden" name="" value="<?php echo $; ?>" /> 
+	    <input type="hidden" name="kode_transaksi" value="<?php echo $kode_transaksi; ?>" /> 
 	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
 	    <a href="<?php echo site_url('detail_transaksi') ?>" class="btn btn-default">Cancel</a>
 	</form>

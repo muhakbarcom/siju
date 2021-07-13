@@ -14,7 +14,6 @@
             <!-- /.box-header -->
             <div class="box-body">
         <table class="table">
-	    <tr><td>Kode Transaksi</td><td><?php echo $kode_transaksi; ?></td></tr>
 	    <tr><td>Jumlah Transaksi</td><td><?php echo $jumlah_transaksi; ?></td></tr>
 	    <tr><td>Nama Transaksi</td><td><?php echo $nama_transaksi; ?></td></tr>
 	    <tr><td>Kode Dtl Transaksi</td><td><?php echo $kode_dtl_transaksi; ?></td></tr>

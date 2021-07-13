@@ -47,7 +47,6 @@
             <tr>
                 <th style="width: 10px;"><input type="checkbox" name="selectall" /></th>
                 <th>No</th>
-		<th>Kode Barang</th>
 		<th>Nama Barang</th>
 		<th>Harga Barang</th>
 		<th>Stok Barang</th>
@@ -58,20 +57,19 @@
                 ?>
                 <tr>
                 
-		<td  style="width: 10px;padding-left: 8px;"><input type="checkbox" name="id" value="<?= $barang->;?>" />&nbsp;</td>
+		<td  style="width: 10px;padding-left: 8px;"><input type="checkbox" name="id" value="<?= $barang->kode_barang;?>" />&nbsp;</td>
                 
 			<td width="80px"><?php echo ++$start ?></td>
-			<td><?php echo $barang->kode_barang ?></td>
 			<td><?php echo $barang->nama_barang ?></td>
 			<td><?php echo $barang->harga_barang ?></td>
 			<td><?php echo $barang->stok_barang ?></td>
 			<td style="text-align:center" width="200px">
 				<?php 
-				echo anchor(site_url('barang/read/'.$barang->),'<i class="fa fa-search"></i>', 'class="btn btn-xs btn-primary"  data-toggle="tooltip" title="Detail"'); 
+				echo anchor(site_url('barang/read/'.$barang->kode_barang),'<i class="fa fa-search"></i>', 'class="btn btn-xs btn-primary"  data-toggle="tooltip" title="Detail"'); 
 				echo ' '; 
-				echo anchor(site_url('barang/update/'.$barang->),' <i class="fa fa-edit"></i>', 'class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit"'); 
+				echo anchor(site_url('barang/update/'.$barang->kode_barang),' <i class="fa fa-edit"></i>', 'class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit"'); 
 				echo ' '; 
-				echo anchor(site_url('barang/delete/'.$barang->),' <i class="fa fa-trash"></i>','class="btn btn-xs btn-danger" onclick="javasciprt: return confirmdelete(\'barang/delete/'.$barang->.'\')"  data-toggle="tooltip" title="Delete" '); 
+				echo anchor(site_url('barang/delete/'.$barang->kode_barang),' <i class="fa fa-trash"></i>','class="btn btn-xs btn-danger" onclick="javasciprt: return confirmdelete(\'barang/delete/'.$barang->kode_barang.'\')"  data-toggle="tooltip" title="Delete" '); 
 				?>
 			</td>
 		</tr>

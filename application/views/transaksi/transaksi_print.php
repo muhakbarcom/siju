@@ -31,7 +31,6 @@
     <table class="word-table" style="margin-bottom: 10px">
             <tr>
                 <th>No</th>
-		<th>Kode Barang</th>
 		<th>Nama Barang</th>
 		<th>Harga Barang</th>
 		<th>Quantity</th>
@@ -45,7 +44,6 @@
                 ?>
                 <tr>
 		      <td><?php echo ++$start ?></td>
-		      <td><?php echo $transaksi->kode_barang ?></td>
 		      <td><?php echo $transaksi->nama_barang ?></td>
 		      <td><?php echo $transaksi->harga_barang ?></td>
 		      <td><?php echo $transaksi->quantity ?></td>

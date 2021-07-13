@@ -14,7 +14,6 @@
             <!-- /.box-header -->
             <div class="box-body">
         <table class="table">
-	    <tr><td>Kode Barang</td><td><?php echo $kode_barang; ?></td></tr>
 	    <tr><td>Nama Barang</td><td><?php echo $nama_barang; ?></td></tr>
 	    <tr><td>Harga Barang</td><td><?php echo $harga_barang; ?></td></tr>
 	    <tr><td>Stok Barang</td><td><?php echo $stok_barang; ?></td></tr>

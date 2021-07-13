@@ -47,7 +47,6 @@
             <tr>
                 <th style="width: 10px;"><input type="checkbox" name="selectall" /></th>
                 <th>No</th>
-		<th>Kode Transaksi</th>
 		<th>Jumlah Transaksi</th>
 		<th>Nama Transaksi</th>
 		<th>Kode Dtl Transaksi</th>
@@ -58,20 +57,19 @@
                 ?>
                 <tr>
                 
-		<td  style="width: 10px;padding-left: 8px;"><input type="checkbox" name="id" value="<?= $detail_transaksi->;?>" />&nbsp;</td>
+		<td  style="width: 10px;padding-left: 8px;"><input type="checkbox" name="id" value="<?= $detail_transaksi->kode_transaksi;?>" />&nbsp;</td>
                 
 			<td width="80px"><?php echo ++$start ?></td>
-			<td><?php echo $detail_transaksi->kode_transaksi ?></td>
 			<td><?php echo $detail_transaksi->jumlah_transaksi ?></td>
 			<td><?php echo $detail_transaksi->nama_transaksi ?></td>
 			<td><?php echo $detail_transaksi->kode_dtl_transaksi ?></td>
 			<td style="text-align:center" width="200px">
 				<?php 
-				echo anchor(site_url('detail_transaksi/read/'.$detail_transaksi->),'<i class="fa fa-search"></i>', 'class="btn btn-xs btn-primary"  data-toggle="tooltip" title="Detail"'); 
+				echo anchor(site_url('detail_transaksi/read/'.$detail_transaksi->kode_transaksi),'<i class="fa fa-search"></i>', 'class="btn btn-xs btn-primary"  data-toggle="tooltip" title="Detail"'); 
 				echo ' '; 
-				echo anchor(site_url('detail_transaksi/update/'.$detail_transaksi->),' <i class="fa fa-edit"></i>', 'class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit"'); 
+				echo anchor(site_url('detail_transaksi/update/'.$detail_transaksi->kode_transaksi),' <i class="fa fa-edit"></i>', 'class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit"'); 
 				echo ' '; 
-				echo anchor(site_url('detail_transaksi/delete/'.$detail_transaksi->),' <i class="fa fa-trash"></i>','class="btn btn-xs btn-danger" onclick="javasciprt: return confirmdelete(\'detail_transaksi/delete/'.$detail_transaksi->.'\')"  data-toggle="tooltip" title="Delete" '); 
+				echo anchor(site_url('detail_transaksi/delete/'.$detail_transaksi->kode_transaksi),' <i class="fa fa-trash"></i>','class="btn btn-xs btn-danger" onclick="javasciprt: return confirmdelete(\'detail_transaksi/delete/'.$detail_transaksi->kode_transaksi.'\')"  data-toggle="tooltip" title="Delete" '); 
 				?>
 			</td>
 		</tr>

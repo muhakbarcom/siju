@@ -31,7 +31,6 @@
     <table class="word-table" style="margin-bottom: 10px">
             <tr>
                 <th>No</th>
-		<th>Kode Transaksi</th>
 		<th>Jumlah Transaksi</th>
 		<th>Nama Transaksi</th>
 		<th>Kode Dtl Transaksi</th>
@@ -42,7 +41,6 @@
                 ?>
                 <tr>
 		      <td><?php echo ++$start ?></td>
-		      <td><?php echo $detail_transaksi->kode_transaksi ?></td>
 		      <td><?php echo $detail_transaksi->jumlah_transaksi ?></td>
 		      <td><?php echo $detail_transaksi->nama_transaksi ?></td>
 		      <td><?php echo $detail_transaksi->kode_dtl_transaksi ?></td>	
