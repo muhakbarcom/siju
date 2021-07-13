@@ -15,8 +15,8 @@
             <div class="box-body">
         <form action="<?php echo $action; ?>" method="post">
 	    <div class="form-group">
-            <label for="int">Nama Barang <?php echo form_error('nama_barang') ?></label>
-            <input type="text" class="form-control" name="nama_barang" id="nama_barang" placeholder="Nama Barang" value="<?php echo $nama_barang; ?>" />
+            <label for="int">Id Barang <?php echo form_error('id_barang') ?></label>
+            <input type="text" class="form-control" name="id_barang" id="id_barang" placeholder="Id Barang" value="<?php echo $id_barang; ?>" />
         </div>
 	    <div class="form-group">
             <label for="int">Harga Barang <?php echo form_error('harga_barang') ?></label>

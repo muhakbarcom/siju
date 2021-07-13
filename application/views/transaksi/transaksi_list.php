@@ -47,7 +47,7 @@
             <tr>
                 <th style="width: 10px;"><input type="checkbox" name="selectall" /></th>
                 <th>No</th>
-		<th>Nama Barang</th>
+		<th>Id Barang</th>
 		<th>Harga Barang</th>
 		<th>Quantity</th>
 		<th>Total Bayar</th>
@@ -63,7 +63,7 @@
 		<td  style="width: 10px;padding-left: 8px;"><input type="checkbox" name="id" value="<?= $transaksi->kode_barang;?>" />&nbsp;</td>
                 
 			<td width="80px"><?php echo ++$start ?></td>
-			<td><?php echo $transaksi->nama_barang ?></td>
+			<td><?php echo $transaksi->id_barang ?></td>
 			<td><?php echo $transaksi->harga_barang ?></td>
 			<td><?php echo $transaksi->quantity ?></td>
 			<td><?php echo $transaksi->total_bayar ?></td>
