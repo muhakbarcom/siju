@@ -11,7 +11,7 @@
     </div>
   </div>
   <div class="box-body" style="">
-    <table class="table table-responsive table-striped table-hovered">
+    <!-- <table class="table table-responsive table-striped table-hovered">
             <thead>
               <th>No</th>
               <th>Nama</th>
@@ -24,9 +24,9 @@
                 <td>admin</td>
               </tr>
             </tbody>
-          </table> 
+          </table> -->
     <div class="embed-responsive embed-responsive-16by9">
-       <iframe style="" marginheight="0" marginwidth="0" src="//localhost/proyek2/crud"></iframe>
+      <iframe style="" marginheight="0" marginwidth="0" src="<?= base_url(); ?>crud"></iframe>
     </div>
   </div>
 
