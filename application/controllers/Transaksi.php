@@ -94,6 +94,8 @@ class Transaksi extends CI_Controller
 	    'pendapatan' => set_value('pendapatan'),
 	);
         $data['title'] = 'Transaksi';
+        $data['barang'] = $this->db->query("select * from barang")->result();
+        $data['keranjang'] = $this->db->query("select * from keranjang")->result();
         $data['subtitle'] = '';
         $data['crumb'] = [
             'Dashboard' => '',
