@@ -14,9 +14,10 @@
             <!-- /.box-header -->
             <div class="box-body">
         <table class="table">
-	    <tr><td>Jumlah Transaksi</td><td><?php echo $jumlah_transaksi; ?></td></tr>
-	    <tr><td>Nama Transaksi</td><td><?php echo $nama_transaksi; ?></td></tr>
-	    <tr><td>Kode Dtl Transaksi</td><td><?php echo $kode_dtl_transaksi; ?></td></tr>
+	    <tr><td>Id Barang</td><td><?php echo $id_barang; ?></td></tr>
+	    <tr><td>Id Transaksi</td><td><?php echo $id_transaksi; ?></td></tr>
+	    <tr><td>Quantity</td><td><?php echo $quantity; ?></td></tr>
+	    <tr><td>Total</td><td><?php echo $total; ?></td></tr>
 	    <tr><td><a href="<?php echo site_url('detail_transaksi') ?>" class="btn bg-purple">Cancel</a></td></tr>
 	</table>
             </div>

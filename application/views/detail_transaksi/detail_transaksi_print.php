@@ -31,9 +31,10 @@
     <table class="word-table" style="margin-bottom: 10px">
             <tr>
                 <th>No</th>
-		<th>Jumlah Transaksi</th>
-		<th>Nama Transaksi</th>
-		<th>Kode Dtl Transaksi</th>
+		<th>Id Barang</th>
+		<th>Id Transaksi</th>
+		<th>Quantity</th>
+		<th>Total</th>
 		
             </tr><?php
             foreach ($detail_transaksi_data as $detail_transaksi)
@@ -41,9 +42,10 @@
                 ?>
                 <tr>
 		      <td><?php echo ++$start ?></td>
-		      <td><?php echo $detail_transaksi->jumlah_transaksi ?></td>
-		      <td><?php echo $detail_transaksi->nama_transaksi ?></td>
-		      <td><?php echo $detail_transaksi->kode_dtl_transaksi ?></td>	
+		      <td><?php echo $detail_transaksi->id_barang ?></td>
+		      <td><?php echo $detail_transaksi->id_transaksi ?></td>
+		      <td><?php echo $detail_transaksi->quantity ?></td>
+		      <td><?php echo $detail_transaksi->total ?></td>	
                 </tr>
                 <?php
             }

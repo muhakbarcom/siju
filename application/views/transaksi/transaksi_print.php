@@ -31,12 +31,9 @@
     <table class="word-table" style="margin-bottom: 10px">
             <tr>
                 <th>No</th>
-		<th>Id Barang</th>
-		<th>Harga Barang</th>
-		<th>Quantity</th>
+		<th>Status Transaksi</th>
 		<th>Total Bayar</th>
-		<th>Tanggal Penjualan</th>
-		<th>Pendapatan</th>
+		<th>Tanggal Transaksi</th>
 		
             </tr><?php
             foreach ($transaksi_data as $transaksi)
@@ -44,12 +41,9 @@
                 ?>
                 <tr>
 		      <td><?php echo ++$start ?></td>
-		      <td><?php echo $transaksi->id_barang ?></td>
-		      <td><?php echo $transaksi->harga_barang ?></td>
-		      <td><?php echo $transaksi->quantity ?></td>
+		      <td><?php echo $transaksi->status_transaksi ?></td>
 		      <td><?php echo $transaksi->total_bayar ?></td>
-		      <td><?php echo $transaksi->tanggal_penjualan ?></td>
-		      <td><?php echo $transaksi->pendapatan ?></td>	
+		      <td><?php echo $transaksi->tanggal_transaksi ?></td>	
                 </tr>
                 <?php
             }

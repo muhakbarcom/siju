@@ -58,10 +58,11 @@ class Detail_transaksi extends CI_Controller
         $row = $this->Detail_transaksi_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'kode_transaksi' => $row->kode_transaksi,
-		'jumlah_transaksi' => $row->jumlah_transaksi,
-		'nama_transaksi' => $row->nama_transaksi,
-		'kode_dtl_transaksi' => $row->kode_dtl_transaksi,
+		'id_barang' => $row->id_barang,
+		'id_transaksi' => $row->id_transaksi,
+		'id_dtl_transaksi' => $row->id_dtl_transaksi,
+		'quantity' => $row->quantity,
+		'total' => $row->total,
 	    );
         $data['title'] = 'Detail Transaksi';
         $data['subtitle'] = '';
@@ -82,10 +83,11 @@ class Detail_transaksi extends CI_Controller
         $data = array(
             'button' => 'Create',
             'action' => site_url('detail_transaksi/create_action'),
-	    'kode_transaksi' => set_value('kode_transaksi'),
-	    'jumlah_transaksi' => set_value('jumlah_transaksi'),
-	    'nama_transaksi' => set_value('nama_transaksi'),
-	    'kode_dtl_transaksi' => set_value('kode_dtl_transaksi'),
+	    'id_barang' => set_value('id_barang'),
+	    'id_transaksi' => set_value('id_transaksi'),
+	    'id_dtl_transaksi' => set_value('id_dtl_transaksi'),
+	    'quantity' => set_value('quantity'),
+	    'total' => set_value('total'),
 	);
         $data['title'] = 'Detail Transaksi';
         $data['subtitle'] = '';
@@ -105,9 +107,10 @@ class Detail_transaksi extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'jumlah_transaksi' => $this->input->post('jumlah_transaksi',TRUE),
-		'nama_transaksi' => $this->input->post('nama_transaksi',TRUE),
-		'kode_dtl_transaksi' => $this->input->post('kode_dtl_transaksi',TRUE),
+		'id_barang' => $this->input->post('id_barang',TRUE),
+		'id_transaksi' => $this->input->post('id_transaksi',TRUE),
+		'quantity' => $this->input->post('quantity',TRUE),
+		'total' => $this->input->post('total',TRUE),
 	    );
 
             $this->Detail_transaksi_model->insert($data);
@@ -124,10 +127,11 @@ class Detail_transaksi extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('detail_transaksi/update_action'),
-		'kode_transaksi' => set_value('kode_transaksi', $row->kode_transaksi),
-		'jumlah_transaksi' => set_value('jumlah_transaksi', $row->jumlah_transaksi),
-		'nama_transaksi' => set_value('nama_transaksi', $row->nama_transaksi),
-		'kode_dtl_transaksi' => set_value('kode_dtl_transaksi', $row->kode_dtl_transaksi),
+		'id_barang' => set_value('id_barang', $row->id_barang),
+		'id_transaksi' => set_value('id_transaksi', $row->id_transaksi),
+		'id_dtl_transaksi' => set_value('id_dtl_transaksi', $row->id_dtl_transaksi),
+		'quantity' => set_value('quantity', $row->quantity),
+		'total' => set_value('total', $row->total),
 	    );
             $data['title'] = 'Detail Transaksi';
         $data['subtitle'] = '';
@@ -148,15 +152,16 @@ class Detail_transaksi extends CI_Controller
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
-            $this->update($this->input->post('kode_transaksi', TRUE));
+            $this->update($this->input->post('id_dtl_transaksi', TRUE));
         } else {
             $data = array(
-		'jumlah_transaksi' => $this->input->post('jumlah_transaksi',TRUE),
-		'nama_transaksi' => $this->input->post('nama_transaksi',TRUE),
-		'kode_dtl_transaksi' => $this->input->post('kode_dtl_transaksi',TRUE),
+		'id_barang' => $this->input->post('id_barang',TRUE),
+		'id_transaksi' => $this->input->post('id_transaksi',TRUE),
+		'quantity' => $this->input->post('quantity',TRUE),
+		'total' => $this->input->post('total',TRUE),
 	    );
 
-            $this->Detail_transaksi_model->update($this->input->post('kode_transaksi', TRUE), $data);
+            $this->Detail_transaksi_model->update($this->input->post('id_dtl_transaksi', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('detail_transaksi'));
         }
@@ -188,11 +193,12 @@ class Detail_transaksi extends CI_Controller
    
     public function _rules() 
     {
-	$this->form_validation->set_rules('jumlah_transaksi', 'jumlah transaksi', 'trim|required');
-	$this->form_validation->set_rules('nama_transaksi', 'nama transaksi', 'trim|required');
-	$this->form_validation->set_rules('kode_dtl_transaksi', 'kode dtl transaksi', 'trim|required');
+	$this->form_validation->set_rules('id_barang', 'id barang', 'trim|required');
+	$this->form_validation->set_rules('id_transaksi', 'id transaksi', 'trim|required');
+	$this->form_validation->set_rules('quantity', 'quantity', 'trim|required');
+	$this->form_validation->set_rules('total', 'total', 'trim|required');
 
-	$this->form_validation->set_rules('kode_transaksi', 'kode_transaksi', 'trim');
+	$this->form_validation->set_rules('id_dtl_transaksi', 'id_dtl_transaksi', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
@@ -201,5 +207,5 @@ class Detail_transaksi extends CI_Controller
 /* End of file Detail_transaksi.php */
 /* Location: ./application/controllers/Detail_transaksi.php */
 /* Please DO NOT modify this information : */
-/* Generated by Harviacode Codeigniter CRUD Generator 2021-07-13 15:08:31 */
+/* Generated by Harviacode Codeigniter CRUD Generator 2021-07-16 07:39:45 */
 /* http://harviacode.com */

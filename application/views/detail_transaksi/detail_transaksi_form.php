@@ -15,18 +15,22 @@
             <div class="box-body">
         <form action="<?php echo $action; ?>" method="post">
 	    <div class="form-group">
-            <label for="int">Jumlah Transaksi <?php echo form_error('jumlah_transaksi') ?></label>
-            <input type="text" class="form-control" name="jumlah_transaksi" id="jumlah_transaksi" placeholder="Jumlah Transaksi" value="<?php echo $jumlah_transaksi; ?>" />
+            <label for="int">Id Barang <?php echo form_error('id_barang') ?></label>
+            <input type="text" class="form-control" name="id_barang" id="id_barang" placeholder="Id Barang" value="<?php echo $id_barang; ?>" />
         </div>
 	    <div class="form-group">
-            <label for="char">Nama Transaksi <?php echo form_error('nama_transaksi') ?></label>
-            <input type="text" class="form-control" name="nama_transaksi" id="nama_transaksi" placeholder="Nama Transaksi" value="<?php echo $nama_transaksi; ?>" />
+            <label for="char">Id Transaksi <?php echo form_error('id_transaksi') ?></label>
+            <input type="text" class="form-control" name="id_transaksi" id="id_transaksi" placeholder="Id Transaksi" value="<?php echo $id_transaksi; ?>" />
         </div>
 	    <div class="form-group">
-            <label for="int">Kode Dtl Transaksi <?php echo form_error('kode_dtl_transaksi') ?></label>
-            <input type="text" class="form-control" name="kode_dtl_transaksi" id="kode_dtl_transaksi" placeholder="Kode Dtl Transaksi" value="<?php echo $kode_dtl_transaksi; ?>" />
+            <label for="int">Quantity <?php echo form_error('quantity') ?></label>
+            <input type="text" class="form-control" name="quantity" id="quantity" placeholder="Quantity" value="<?php echo $quantity; ?>" />
         </div>
-	    <input type="hidden" name="kode_transaksi" value="<?php echo $kode_transaksi; ?>" /> 
+	    <div class="form-group">
+            <label for="int">Total <?php echo form_error('total') ?></label>
+            <input type="text" class="form-control" name="total" id="total" placeholder="Total" value="<?php echo $total; ?>" />
+        </div>
+	    <input type="hidden" name="id_dtl_transaksi" value="<?php echo $id_dtl_transaksi; ?>" /> 
 	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
 	    <a href="<?php echo site_url('detail_transaksi') ?>" class="btn btn-default">Cancel</a>
 	</form>

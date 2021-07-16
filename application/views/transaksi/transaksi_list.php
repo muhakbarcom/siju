@@ -47,12 +47,9 @@
             <tr>
                 <th style="width: 10px;"><input type="checkbox" name="selectall" /></th>
                 <th>No</th>
-		<th>Id Barang</th>
-		<th>Harga Barang</th>
-		<th>Quantity</th>
+		<th>Status Transaksi</th>
 		<th>Total Bayar</th>
-		<th>Tanggal Penjualan</th>
-		<th>Pendapatan</th>
+		<th>Tanggal Transaksi</th>
 		<th>Action</th>
             </tr><?php
             foreach ($transaksi_data as $transaksi)
@@ -60,22 +57,19 @@
                 ?>
                 <tr>
                 
-		<td  style="width: 10px;padding-left: 8px;"><input type="checkbox" name="id" value="<?= $transaksi->kode_barang;?>" />&nbsp;</td>
+		<td  style="width: 10px;padding-left: 8px;"><input type="checkbox" name="id" value="<?= $transaksi->id_transaksi;?>" />&nbsp;</td>
                 
 			<td width="80px"><?php echo ++$start ?></td>
-			<td><?php echo $transaksi->id_barang ?></td>
-			<td><?php echo $transaksi->harga_barang ?></td>
-			<td><?php echo $transaksi->quantity ?></td>
+			<td><?php echo $transaksi->status_transaksi ?></td>
 			<td><?php echo $transaksi->total_bayar ?></td>
-			<td><?php echo $transaksi->tanggal_penjualan ?></td>
-			<td><?php echo $transaksi->pendapatan ?></td>
+			<td><?php echo $transaksi->tanggal_transaksi ?></td>
 			<td style="text-align:center" width="200px">
 				<?php 
-				echo anchor(site_url('transaksi/read/'.$transaksi->kode_barang),'<i class="fa fa-search"></i>', 'class="btn btn-xs btn-primary"  data-toggle="tooltip" title="Detail"'); 
+				echo anchor(site_url('transaksi/read/'.$transaksi->id_transaksi),'<i class="fa fa-search"></i>', 'class="btn btn-xs btn-primary"  data-toggle="tooltip" title="Detail"'); 
 				echo ' '; 
-				echo anchor(site_url('transaksi/update/'.$transaksi->kode_barang),' <i class="fa fa-edit"></i>', 'class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit"'); 
+				echo anchor(site_url('transaksi/update/'.$transaksi->id_transaksi),' <i class="fa fa-edit"></i>', 'class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit"'); 
 				echo ' '; 
-				echo anchor(site_url('transaksi/delete/'.$transaksi->kode_barang),' <i class="fa fa-trash"></i>','class="btn btn-xs btn-danger" onclick="javasciprt: return confirmdelete(\'transaksi/delete/'.$transaksi->kode_barang.'\')"  data-toggle="tooltip" title="Delete" '); 
+				echo anchor(site_url('transaksi/delete/'.$transaksi->id_transaksi),' <i class="fa fa-trash"></i>','class="btn btn-xs btn-danger" onclick="javasciprt: return confirmdelete(\'transaksi/delete/'.$transaksi->id_transaksi.'\')"  data-toggle="tooltip" title="Delete" '); 
 				?>
 			</td>
 		</tr>

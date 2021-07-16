@@ -15,30 +15,18 @@
             <div class="box-body">
         <form action="<?php echo $action; ?>" method="post">
 	    <div class="form-group">
-            <label for="int">Id Barang <?php echo form_error('id_barang') ?></label>
-            <input type="text" class="form-control" name="id_barang" id="id_barang" placeholder="Id Barang" value="<?php echo $id_barang; ?>" />
-        </div>
-	    <div class="form-group">
-            <label for="int">Harga Barang <?php echo form_error('harga_barang') ?></label>
-            <input type="text" class="form-control" name="harga_barang" id="harga_barang" placeholder="Harga Barang" value="<?php echo $harga_barang; ?>" />
-        </div>
-	    <div class="form-group">
-            <label for="int">Quantity <?php echo form_error('quantity') ?></label>
-            <input type="text" class="form-control" name="quantity" id="quantity" placeholder="Quantity" value="<?php echo $quantity; ?>" />
+            <label for="int">Status Transaksi <?php echo form_error('status_transaksi') ?></label>
+            <input type="text" class="form-control" name="status_transaksi" id="status_transaksi" placeholder="Status Transaksi" value="<?php echo $status_transaksi; ?>" />
         </div>
 	    <div class="form-group">
             <label for="int">Total Bayar <?php echo form_error('total_bayar') ?></label>
             <input type="text" class="form-control" name="total_bayar" id="total_bayar" placeholder="Total Bayar" value="<?php echo $total_bayar; ?>" />
         </div>
 	    <div class="form-group">
-            <label for="int">Tanggal Penjualan <?php echo form_error('tanggal_penjualan') ?></label>
-            <input type="text" class="form-control" name="tanggal_penjualan" id="tanggal_penjualan" placeholder="Tanggal Penjualan" value="<?php echo $tanggal_penjualan; ?>" />
+            <label for="date">Tanggal Transaksi <?php echo form_error('tanggal_transaksi') ?></label>
+            <input type="text" class="form-control" name="tanggal_transaksi" id="tanggal_transaksi" placeholder="Tanggal Transaksi" value="<?php echo $tanggal_transaksi; ?>" />
         </div>
-	    <div class="form-group">
-            <label for="int">Pendapatan <?php echo form_error('pendapatan') ?></label>
-            <input type="text" class="form-control" name="pendapatan" id="pendapatan" placeholder="Pendapatan" value="<?php echo $pendapatan; ?>" />
-        </div>
-	    <input type="hidden" name="kode_barang" value="<?php echo $kode_barang; ?>" /> 
+	    <input type="hidden" name="id_transaksi" value="<?php echo $id_transaksi; ?>" /> 
 	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
 	    <a href="<?php echo site_url('transaksi') ?>" class="btn btn-default">Cancel</a>
 	</form>

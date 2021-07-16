@@ -58,13 +58,10 @@ class Transaksi extends CI_Controller
         $row = $this->Transaksi_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'kode_barang' => $row->kode_barang,
-		'id_barang' => $row->id_barang,
-		'harga_barang' => $row->harga_barang,
-		'quantity' => $row->quantity,
+		'id_transaksi' => $row->id_transaksi,
+		'status_transaksi' => $row->status_transaksi,
 		'total_bayar' => $row->total_bayar,
-		'tanggal_penjualan' => $row->tanggal_penjualan,
-		'pendapatan' => $row->pendapatan,
+		'tanggal_transaksi' => $row->tanggal_transaksi,
 	    );
         $data['title'] = 'Transaksi';
         $data['subtitle'] = '';
@@ -85,17 +82,12 @@ class Transaksi extends CI_Controller
         $data = array(
             'button' => 'Create',
             'action' => site_url('transaksi/create_action'),
-	    'kode_barang' => set_value('kode_barang'),
-	    'id_barang' => set_value('id_barang'),
-	    'harga_barang' => set_value('harga_barang'),
-	    'quantity' => set_value('quantity'),
+	    'id_transaksi' => set_value('id_transaksi'),
+	    'status_transaksi' => set_value('status_transaksi'),
 	    'total_bayar' => set_value('total_bayar'),
-	    'tanggal_penjualan' => set_value('tanggal_penjualan'),
-	    'pendapatan' => set_value('pendapatan'),
+	    'tanggal_transaksi' => set_value('tanggal_transaksi'),
 	);
         $data['title'] = 'Transaksi';
-        $data['barang'] = $this->db->query("select * from barang")->result();
-        $data['keranjang'] = $this->db->query("select * from keranjang")->result();
         $data['subtitle'] = '';
         $data['crumb'] = [
             'Dashboard' => '',
@@ -113,12 +105,9 @@ class Transaksi extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'id_barang' => $this->input->post('id_barang',TRUE),
-		'harga_barang' => $this->input->post('harga_barang',TRUE),
-		'quantity' => $this->input->post('quantity',TRUE),
+		'status_transaksi' => $this->input->post('status_transaksi',TRUE),
 		'total_bayar' => $this->input->post('total_bayar',TRUE),
-		'tanggal_penjualan' => $this->input->post('tanggal_penjualan',TRUE),
-		'pendapatan' => $this->input->post('pendapatan',TRUE),
+		'tanggal_transaksi' => $this->input->post('tanggal_transaksi',TRUE),
 	    );
 
             $this->Transaksi_model->insert($data);
@@ -135,13 +124,10 @@ class Transaksi extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('transaksi/update_action'),
-		'kode_barang' => set_value('kode_barang', $row->kode_barang),
-		'id_barang' => set_value('id_barang', $row->id_barang),
-		'harga_barang' => set_value('harga_barang', $row->harga_barang),
-		'quantity' => set_value('quantity', $row->quantity),
+		'id_transaksi' => set_value('id_transaksi', $row->id_transaksi),
+		'status_transaksi' => set_value('status_transaksi', $row->status_transaksi),
 		'total_bayar' => set_value('total_bayar', $row->total_bayar),
-		'tanggal_penjualan' => set_value('tanggal_penjualan', $row->tanggal_penjualan),
-		'pendapatan' => set_value('pendapatan', $row->pendapatan),
+		'tanggal_transaksi' => set_value('tanggal_transaksi', $row->tanggal_transaksi),
 	    );
             $data['title'] = 'Transaksi';
         $data['subtitle'] = '';
@@ -162,18 +148,15 @@ class Transaksi extends CI_Controller
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
-            $this->update($this->input->post('kode_barang', TRUE));
+            $this->update($this->input->post('id_transaksi', TRUE));
         } else {
             $data = array(
-		'id_barang' => $this->input->post('id_barang',TRUE),
-		'harga_barang' => $this->input->post('harga_barang',TRUE),
-		'quantity' => $this->input->post('quantity',TRUE),
+		'status_transaksi' => $this->input->post('status_transaksi',TRUE),
 		'total_bayar' => $this->input->post('total_bayar',TRUE),
-		'tanggal_penjualan' => $this->input->post('tanggal_penjualan',TRUE),
-		'pendapatan' => $this->input->post('pendapatan',TRUE),
+		'tanggal_transaksi' => $this->input->post('tanggal_transaksi',TRUE),
 	    );
 
-            $this->Transaksi_model->update($this->input->post('kode_barang', TRUE), $data);
+            $this->Transaksi_model->update($this->input->post('id_transaksi', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('transaksi'));
         }
@@ -205,14 +188,11 @@ class Transaksi extends CI_Controller
    
     public function _rules() 
     {
-	$this->form_validation->set_rules('id_barang', 'id barang', 'trim|required');
-	$this->form_validation->set_rules('harga_barang', 'harga barang', 'trim|required');
-	$this->form_validation->set_rules('quantity', 'quantity', 'trim|required');
+	$this->form_validation->set_rules('status_transaksi', 'status transaksi', 'trim|required');
 	$this->form_validation->set_rules('total_bayar', 'total bayar', 'trim|required');
-	$this->form_validation->set_rules('tanggal_penjualan', 'tanggal penjualan', 'trim|required');
-	$this->form_validation->set_rules('pendapatan', 'pendapatan', 'trim|required');
+	$this->form_validation->set_rules('tanggal_transaksi', 'tanggal transaksi', 'trim|required');
 
-	$this->form_validation->set_rules('kode_barang', 'kode_barang', 'trim');
+	$this->form_validation->set_rules('id_transaksi', 'id_transaksi', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
@@ -221,5 +201,5 @@ class Transaksi extends CI_Controller
 /* End of file Transaksi.php */
 /* Location: ./application/controllers/Transaksi.php */
 /* Please DO NOT modify this information : */
-/* Generated by Harviacode Codeigniter CRUD Generator 2021-07-13 15:40:53 */
+/* Generated by Harviacode Codeigniter CRUD Generator 2021-07-16 07:39:50 */
 /* http://harviacode.com */
