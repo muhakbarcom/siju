@@ -26,7 +26,7 @@
             <label for="int">Stok Barang <?php echo form_error('stok_barang') ?></label>
             <input type="text" class="form-control" name="stok_barang" id="stok_barang" placeholder="Stok Barang" value="<?php echo $stok_barang; ?>" />
         </div>
-	    <input type="hidden" name="kode_barang" value="<?php echo $kode_barang; ?>" /> 
+	    <input type="hidden" name="id_barang" value="<?php echo $id_barang; ?>" /> 
 	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
 	    <a href="<?php echo site_url('barang') ?>" class="btn btn-default">Cancel</a>
 	</form>

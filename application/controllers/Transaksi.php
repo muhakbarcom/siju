@@ -12,6 +12,9 @@ class Transaksi extends CI_Controller
         $this->layout->auth(); 
         $this->layout->auth_privilege($c_url);
         $this->load->model('Transaksi_model');
+        $this->load->model('Detail_transaksi_model');
+        $this->load->model('Barang_model');
+        $this->load->model('Keranjang_model');
         $this->load->library('form_validation');
     }
 
@@ -81,38 +84,103 @@ class Transaksi extends CI_Controller
     {
         $data = array(
             'button' => 'Create',
-            'action' => site_url('transaksi/create_action'),
+            'action' => site_url('keranjang/create_action'),
 	    'id_transaksi' => set_value('id_transaksi'),
 	    'status_transaksi' => set_value('status_transaksi'),
 	    'total_bayar' => set_value('total_bayar'),
 	    'tanggal_transaksi' => set_value('tanggal_transaksi'),
 	);
         $data['title'] = 'Transaksi';
+        $data['barang'] = $this->db->query("select * from barang")->result();
+        $data['keranjang'] = $this->db->query("select * from keranjang")->result();
         $data['subtitle'] = '';
         $data['crumb'] = [
             'Dashboard' => '',
         ];
 
-        $data['page'] = 'transaksi/transaksi_form';
+        $data['page'] = 'transaksi/pesan';
+        $this->load->view('template/backend', $data);
+    }
+    public function nota($idtrx) 
+    {
+        $transaksi= $this->db->query("select id_transaksi,total_bayar,tanggal_transaksi from transaksi where id_transaksi=$idtrx")->row();
+        $data = array(
+            'button' => 'Create',
+            'action' => site_url('keranjang/create_action'),
+	    'id_transaksi' => $transaksi->id_transaksi,
+	    'total_bayar' =>  $transaksi->total_bayar,
+	    'tanggal_transaksi' => $transaksi->tanggal_transaksi,
+	);
+        $data['title'] = 'Transaksi';
+        $data['detail'] = $this->db->query("select * from detail_transaksi where id_transaksi=$idtrx")->result();
+     
+        $data['subtitle'] = '';
+        $data['crumb'] = [
+            'Dashboard' => '',
+        ];
+
+        $data['page'] = 'keranjang/nota';
+        $this->load->view('template/backend', $data);
+    }
+    public function printnota($idtrx) 
+    {
+        $transaksi= $this->db->query("select id_transaksi,total_bayar,tanggal_transaksi from transaksi where id_transaksi=$idtrx")->row();
+        $data = array(
+            'button' => 'Create',
+            'action' => site_url('keranjang/create_action'),
+	    'id_transaksi' => $transaksi->id_transaksi,
+	    'total_bayar' =>  $transaksi->total_bayar,
+	    'tanggal_transaksi' => $transaksi->tanggal_transaksi,
+	);
+        $data['title'] = 'Transaksi';
+        $data['detail'] = $this->db->query("select * from detail_transaksi where id_transaksi=$idtrx")->result();
+     
+        $data['subtitle'] = '';
+        $data['crumb'] = [
+            'Dashboard' => '',
+        ];
+
+        $data['page'] = 'keranjang/nota_print';
         $this->load->view('template/backend', $data);
     }
     
-    public function create_action() 
+    public function create_action()
     {
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
-            $this->create();
+            //$this->create();
+            echo "oke";
         } else {
+            // ambil data keranjang
+            $keranjang_row = $this->db->query("SELECT sum(total_harga) as total from keranjang")->row();
+            // insert data sewa
             $data = array(
-		'status_transaksi' => $this->input->post('status_transaksi',TRUE),
-		'total_bayar' => $this->input->post('total_bayar',TRUE),
-		'tanggal_transaksi' => $this->input->post('tanggal_transaksi',TRUE),
-	    );
+                'tanggal_transaksi' => date('Y-m-d'),
+                // 'tgl_pengembalian' => $this->input->post('tgl_pengembalian', TRUE),
+                // 'denda' => $this->input->post('denda', TRUE),
+                'total_bayar' => $keranjang_row->total,
+                
+            );
+            $insert_id = $this->Transaksi_model->insert($data);
 
-            $this->Transaksi_model->insert($data);
-            $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('transaksi'));
+
+            // insert data detail_sewa
+            $keranjang = $this->Keranjang_model->get_all();
+            foreach ($keranjang as $k) {
+                $data = array(
+                    'id_transaksi' => $insert_id,
+                    'id_barang' => $k->id_barang,
+                    'quantity' => $k->qty,
+                    'total' => $k->total_harga,
+                );
+                $this->Detail_transaksi_model->insert($data);
+            }
+
+            $this->Keranjang_model->delete_all();
+
+            $this->session->set_flashdata('success', 'Create Record Success');
+            redirect ("transaksi/nota/".$insert_id);
         }
     }
     
@@ -188,9 +256,7 @@ class Transaksi extends CI_Controller
    
     public function _rules() 
     {
-	$this->form_validation->set_rules('status_transaksi', 'status transaksi', 'trim|required');
-	$this->form_validation->set_rules('total_bayar', 'total bayar', 'trim|required');
-	$this->form_validation->set_rules('tanggal_transaksi', 'tanggal transaksi', 'trim|required');
+	
 
 	$this->form_validation->set_rules('id_transaksi', 'id_transaksi', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');

@@ -58,7 +58,7 @@ class Barang extends CI_Controller
         $row = $this->Barang_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'kode_barang' => $row->kode_barang,
+		'id_barang' => $row->id_barang,
 		'nama_barang' => $row->nama_barang,
 		'harga_barang' => $row->harga_barang,
 		'stok_barang' => $row->stok_barang,
@@ -82,7 +82,7 @@ class Barang extends CI_Controller
         $data = array(
             'button' => 'Create',
             'action' => site_url('barang/create_action'),
-	    'kode_barang' => set_value('kode_barang'),
+	    'id_barang' => set_value('id_barang'),
 	    'nama_barang' => set_value('nama_barang'),
 	    'harga_barang' => set_value('harga_barang'),
 	    'stok_barang' => set_value('stok_barang'),
@@ -124,7 +124,7 @@ class Barang extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('barang/update_action'),
-		'kode_barang' => set_value('kode_barang', $row->kode_barang),
+		'id_barang' => set_value('kode_barang', $row->id_barang),
 		'nama_barang' => set_value('nama_barang', $row->nama_barang),
 		'harga_barang' => set_value('harga_barang', $row->harga_barang),
 		'stok_barang' => set_value('stok_barang', $row->stok_barang),
@@ -148,7 +148,7 @@ class Barang extends CI_Controller
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
-            $this->update($this->input->post('kode_barang', TRUE));
+            $this->update($this->input->post('id_barang', TRUE));
         } else {
             $data = array(
 		'nama_barang' => $this->input->post('nama_barang',TRUE),
@@ -156,7 +156,7 @@ class Barang extends CI_Controller
 		'stok_barang' => $this->input->post('stok_barang',TRUE),
 	    );
 
-            $this->Barang_model->update($this->input->post('kode_barang', TRUE), $data);
+            $this->Barang_model->update($this->input->post('id_barang', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('barang'));
         }
@@ -192,7 +192,7 @@ class Barang extends CI_Controller
 	$this->form_validation->set_rules('harga_barang', 'harga barang', 'trim|required');
 	$this->form_validation->set_rules('stok_barang', 'stok barang', 'trim|required');
 
-	$this->form_validation->set_rules('kode_barang', 'kode_barang', 'trim');
+	$this->form_validation->set_rules('id_barang', 'id_barang', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 

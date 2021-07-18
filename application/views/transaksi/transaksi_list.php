@@ -47,7 +47,7 @@
             <tr>
                 <th style="width: 10px;"><input type="checkbox" name="selectall" /></th>
                 <th>No</th>
-		<th>Status Transaksi</th>
+		
 		<th>Total Bayar</th>
 		<th>Tanggal Transaksi</th>
 		<th>Action</th>
@@ -60,8 +60,7 @@
 		<td  style="width: 10px;padding-left: 8px;"><input type="checkbox" name="id" value="<?= $transaksi->id_transaksi;?>" />&nbsp;</td>
                 
 			<td width="80px"><?php echo ++$start ?></td>
-			<td><?php echo $transaksi->status_transaksi ?></td>
-			<td><?php echo $transaksi->total_bayar ?></td>
+				<td><?php echo $transaksi->total_bayar ?></td>
 			<td><?php echo $transaksi->tanggal_transaksi ?></td>
 			<td style="text-align:center" width="200px">
 				<?php 

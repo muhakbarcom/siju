@@ -2,7 +2,7 @@
     <div class="col-xs-12 col-md-6">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title"><?= $button; ?> Sewa</h3>
+                <h3 class="box-title"><?= $button; ?> Keranjang </h3>
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                         <i class="fa fa-minus"></i></button>
@@ -15,12 +15,12 @@
                 <form action="<?php echo $action; ?>" method="post">
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-sm-9"> <label>Barang yang dipinjam</label>
+                            <div class="col-sm-9"> <label>Barang yang dipesan</label>
                                 <select class="selectpicker form-control" name="id_barang" id="id_barang" data-placeholder="Select a Parent" data-live-search="true" style="width: 100%;">
                                     <option value="0">-- Pilih barang -- </option>
                                     <?php
                                     foreach ($barang as $key => $value) {
-                                        echo "<option value='" . $value->id_barang . "'>" . $value->nama_barang . ' = ' . $value->harga_sewa . "</option>";
+                                        echo "<option value='" . $value->id_barang . "'>" . $value->nama_barang . ' = ' . $value->harga_barang . "</option>";
                                     }
                                     ?>
 
@@ -46,7 +46,7 @@
 
                     </div>
                     <input type="hidden" class="form-control" name="id_user" id="id_user" placeholder="Id User" value="<?= $_SESSION['user_id']; ?>" />
-                    <input type="hidden" name="id_sewa" value="<?php echo $id_sewa; ?>" />
+                    <input type="hidden" name="id_transaksi" value="<?php echo $id_transaksi; ?>" />
                     <button type="submit" class="btn btn-primary"><?php echo $button ?></button>
                     <a href="<?php echo site_url('view_sewa') ?>" class="btn btn-default">Cancel</a>
                 </form>
@@ -55,10 +55,10 @@
     </div>
     <div class="col-md-6">
         <!-- keranjang -->
-        <form action="<?= base_url('sewa/create_action'); ?>" method="post">
+        <form action="<?= base_url('transaksi/create_action'); ?>" method="post">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Keranjang Sewa</h3>
+                    <h3 class="box-title">Keranjang barang</h3>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                             <i class="fa fa-minus"></i></button>
@@ -90,7 +90,7 @@
                                         <tr>
                                             <td><?= $i; ?></td>
                                             <td><?= $barang_nama['nama_barang']; ?></td>
-                                            <td><?= $k->jumlah; ?></td>
+                                            <td><?= $k->qty; ?></td>
                                             <td><?= $k->total_harga; ?></td>
                                             <td><a href="<?= base_url('keranjang/delete/') . $k->id_keranjang; ?>">Hapus</a></td>
                                         </tr>
@@ -98,37 +98,10 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="form-group">
-
-                            <label>Member Peminjam</label> <?php echo form_error('id_member') ?>
-                            <select class="selectpicker form-control" name="id_member" id="id_member" data-placeholder="Select a Parent" data-live-search="true" style="width: 100%;">
-                                <option value="">-- Pilih Member -- </option>
-                                <?php
-                                foreach ($member as $key => $value) {
-                                    echo "<option value='" . $value->id_member . "'>" . $value->id_member . " - " . $value->nama . "</option>";
-                                }
-                                ?>
-
-                            </select>
-                        </div>
-
-
-                        <input type="hidden" class="form-control" name="id_user" id="id_user" placeholder="Id User" value="<?= $_SESSION['user_id']; ?>" />
-
-                        <div class="form-group">
-                            <!-- <label for="date">Tgl Sewa <?php echo form_error('tgl_sewa') ?></label> -->
-                            <input type="hidden" class="form-control formdate" name="tgl_sewa" id="tgl_sewa" placeholder="Tgl Sewa" value="<?= date('Y-m-d'); ?>" />
-                        </div>
-                        <div class="form-group">
-                            <!-- <label for="date">Tgl Kembali <?php echo form_error('tgl_kembali') ?></label> -->
-                            <input type="hidden" class="form-control" name="tgl_kembali" id="tgl_kembali" placeholder="Tgl Kembali" value="<?php $date = date('Y-m-d');
-                                                                                                                                            $date = strtotime($date);
-                                                                                                                                            $date = strtotime("+7 day", $date);
-                                                                                                                                            echo date('Y-m-d', $date); ?>" />
-                            <a href="<?= base_url('member/create'); ?>">Bikin member baru?</a>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Sewa</button>
-                        <a href="<?php echo site_url('view_sewa') ?>" class="btn btn-default">Cancel</a>
+                        
+                                                                   
+                        <button type="submit" class="btn btn-primary">Pesan</button>
+                        <a href="<?php echo site_url('transaksi') ?>" class="btn btn-default">Cancel</a>
                     </form>
                 </div>
             </div>

@@ -7,7 +7,7 @@ class Barang_model extends CI_Model
 {
 
     public $table = 'barang';
-    public $id = 'kode_barang';
+    public $id = 'id_barang';
     public $order = 'DESC';
 
     function __construct()
@@ -31,7 +31,7 @@ class Barang_model extends CI_Model
     
     // get total rows
     function total_rows($q = NULL) {
-        $this->db->like('kode_barang', $q);
+        $this->db->like('id_barang', $q);
 	$this->db->or_like('nama_barang', $q);
 	$this->db->or_like('harga_barang', $q);
 	$this->db->or_like('stok_barang', $q);
@@ -42,7 +42,7 @@ class Barang_model extends CI_Model
     // get data with limit and search
     function get_limit_data($limit, $start = 0, $q = NULL) {
         $this->db->order_by($this->id, $this->order);
-        $this->db->like('kode_barang', $q);
+        $this->db->like('id_barang', $q);
 	$this->db->or_like('nama_barang', $q);
 	$this->db->or_like('harga_barang', $q);
 	$this->db->or_like('stok_barang', $q);
