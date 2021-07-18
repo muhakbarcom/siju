@@ -55,7 +55,7 @@ Jl.Agussalim n0.37 Padangsidimpuan</center>
         </table>
          </div>
     <div class="box-footer">
-    <a class="btn btn-primary" href="http://localhost/proyek2/transaksi/printnota/<?php echo $id_transaksi;?>">cetak</a>
+    <a class="btn btn-primary" href="http://localhost/proyek2/transaksi/printnota/<?php echo $id_transaksi;?>">print</a>
     </div>
     
 </div>

@@ -1,9 +1,9 @@
-<div class="box">
-    <div class="box-header"><center>TOKO FADJAR COY<br>
+<div>
+    <div><center>TOKO FADJAR COY<br>
 Menjual bahan & peralatan tani<br>
 Jl.Agussalim n0.37 Padangsidimpuan</center>
 </div>
-    <div class="box-body">
+    <div>
         <table class="table">
             <tr>
                 <td></td>
@@ -54,9 +54,6 @@ Jl.Agussalim n0.37 Padangsidimpuan</center>
             </tr>
         </table>
          </div>
-    <div class="box-footer">
-      
-    </div>
     
 </div>
 <script>
