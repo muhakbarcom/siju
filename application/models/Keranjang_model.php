@@ -21,11 +21,15 @@ class Keranjang_model extends CI_Model
         $this->db->order_by($this->id, $this->order);
         return $this->db->get($this->table)->result();
     }
+<<<<<<< HEAD
     function delete_all()
     {
         $this->db->query("DELETE FROM keranjang");
     }
     
+=======
+
+>>>>>>> 256ac1ff2b94a69d8df292c4262051e4ad3b48bb
     // get data by id
     function get_by_id($id)
     {
