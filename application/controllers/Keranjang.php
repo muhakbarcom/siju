@@ -97,7 +97,7 @@ class Keranjang extends CI_Controller
         $this->load->view('template/backend', $data);
     }
     
-<<<<<<< HEAD
+
     public function create_action()
     {
         $this->_rules();
@@ -117,26 +117,8 @@ class Keranjang extends CI_Controller
             redirect(site_url('transaksi/create'));
         }
     
-=======
-    public function create_action() 
-    {
-        $this->_rules();
 
-        if ($this->form_validation->run() == FALSE) {
-            $this->create();
-        } else {
-            $data = array(
-		'id_barang' => $this->input->post('id_barang',TRUE),
-		'qty' => $this->input->post('qty',TRUE),
-		'total_harga' => $this->input->post('total_harga',TRUE),
-	    );
-
-            $this->Keranjang_model->insert($data);
-            $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('keranjang'));
-        }
-    }
->>>>>>> 256ac1ff2b94a69d8df292c4262051e4ad3b48bb
+   
     
     public function update($id) 
     {
@@ -191,18 +173,14 @@ class Keranjang extends CI_Controller
         if ($row) {
             $this->Keranjang_model->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
-<<<<<<< HEAD
+
             redirect(site_url('transaksi/create'));
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('transaksi/create'));
-=======
+
             redirect(site_url('keranjang'));
-        } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('keranjang'));
->>>>>>> 256ac1ff2b94a69d8df292c4262051e4ad3b48bb
-        }
+        } 
     }
 
     public function deletebulk(){

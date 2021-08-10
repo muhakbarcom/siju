@@ -2,7 +2,7 @@
 <div class="col-xs-12">
     <div class="box">
       <div class="box-header">
-        <h3 class="box-title">Transaksi</h3>
+        <h3 class="box-title">Laporan Penjualan</h3>
         <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
                     title="Collapse">
@@ -15,7 +15,7 @@
       <div class="box-body">
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
-                
+               
             </div>
             <div class="col-md-4 text-center">
                 <div style="margin-top: 8px" id="message">
@@ -24,7 +24,10 @@
             </div>
             <div class="col-md-1 text-right">
             </div>
-            <div class="col-md-3 text-right"><form action="<?php echo site_url('transaksi/index'); ?>" class="form-inline" method="get" style="margin-top:10px">
+            <div class="col-md-3 text-right">
+		<?php echo anchor(site_url('view_penjualan/printdoc'), '<i class="fa fa-print"></i> Print Preview', 'class="btn bg-maroon"'); ?>
+		<?php echo anchor(site_url('view_penjualan/excel'), '<i class="fa fa-file-excel"></i> Excel', 'class="btn btn-success"'); ?>
+		<?php echo anchor(site_url('view_penjualan/word'), '<i class="fa fa-file-word"></i> Word', 'class="btn btn-primary"'); ?><form action="<?php echo site_url('view_penjualan/index'); ?>" class="form-inline" method="get" style="margin-top:10px">
                     <div class="input-group">
                         <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
                         <span class="input-group-btn">
@@ -32,7 +35,7 @@
                                 if ($q <> '')
                                 {
                                     ?>
-                                    <a href="<?php echo site_url('transaksi'); ?>" class="btn btn-default">Reset</a>
+                                    <a href="<?php echo site_url('view_penjualan'); ?>" class="btn btn-default">Reset</a>
                                     <?php
                                 }
                             ?>
@@ -42,47 +45,25 @@
                 </form>
             </div>
         </div>
-        <div style="margin-bottom: 10px;margin-left:10px;margin-top:60px"><label for="filter">Filter Tanggal:</label></div>
-                <div class="row" style="margin-bottom: 10px;margin-left:10px">
-                    <form action="<?php echo base_url('surat/laporan_surat_bulanan'); ?>" class="form-inline" method="post">
-                        <div class="col input-group">
-                            <!-- <label><b>Filter :</b></label> -->
-                            <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-calendar"></i></button></span>
-                            <input type="text" class="form-control formdate2" name="dari" id="DariTanggal" required="true" placeholder="Dari Bulan">
-                        </div>
-                        <div class="col input-group">
-                            <span class="input-group-addon" id="sizing-addon1">
-                                <i class="fas fa-chevron-right"></i></span>
-                            <input type="text" class="form-control formdate2" name="sampai" id="SampaiTanggal" required="true" placeholder="Sampai Bulan">
-                        </div>
-                        <div class="col input-group">
-                            <button type="submit" class="btn btn-primary"> <i class="fas fa-check-circle"></i> Submit</button>
-                        </div>
-                    </form>
-                </div>
-        <form method="post" action="<?= site_url('transaksi/deletebulk');?>" id="formbulk">
+        <form method="post" action="<?= site_url('view_penjualan/deletebulk');?>" id="formbulk">
         <table class="table table-bordered" style="margin-bottom: 10px" style="width:100%">
             <tr>
                
                 <th>No</th>
-		
-		<th>Total Bayar</th>
 		<th>Tanggal Transaksi</th>
-        <th>Status</th>
-		            </tr><?php
-            foreach ($transaksi_data as $transaksi)
+		<th>Total Pendapatan</th>
+		
+            </tr><?php
+            foreach ($view_penjualan_data as $view_penjualan)
             {
                 ?>
                 <tr>
                 
-	
+		               
 			<td width="80px"><?php echo ++$start ?></td>
-				<td><?php echo $transaksi->total_bayar ?></td>
-			<td><?php echo $transaksi->tanggal_transaksi ?></td>
-            <td><?php echo $transaksi->status ?></td>
-			<!-- <td style="text-align:center" width="200px">
-				
-        </td> -->
+			<td><?php echo $view_penjualan->tanggal_transaksi ?></td>
+			<td><?php echo $view_penjualan->total_pendapatan ?></td>
+			
 		</tr>
                 <?php
             }
@@ -90,7 +71,7 @@
         </table>
          <div class="row" style="margin-bottom: 10px;">
             <div class="col-md-12">
-             <a href="#" class="btn bg-yellow">Total Record : <?php echo $total_rows ?></a>
+               <a href="#" class="btn bg-yellow">Total Record : <?php echo $total_rows ?></a>
             </div>
         </div>
         </form>
@@ -135,7 +116,7 @@
             }).set('onok', function (closeEvent) {
 
                 $.ajax({
-                    url: "transaksi/deletebulk",
+                    url: "view_penjualan/deletebulk",
                     type: "post",
                     data: "msg = " + rowsel.join(","),
                     success: function (response) {

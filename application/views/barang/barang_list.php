@@ -6,7 +6,7 @@
         <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
                     title="Collapse">
-              <i class="fa fa-minus"></i></button>
+                    <i class="fa fa-minus"></i></button>
               <button type="button" class="btn btn-box-tool" onclick="location.reload()" title="Refresh">
               <i class="fa fa-refresh"></i></button>
           </div>
@@ -15,7 +15,11 @@
       <div class="box-body">
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
+            <?php if(!$this->ion_auth->in_group(32)) :?>
                 <?php echo anchor(site_url('barang/create'),'<i class="fa fa-plus"></i> Create', 'class="btn bg-purple"'); ?>
+            <?php endif ?>
+
+                
             </div>
             <div class="col-md-4 text-center">
                 <div style="margin-top: 8px" id="message">
@@ -45,24 +49,30 @@
         <form method="post" action="<?= site_url('barang/deletebulk');?>" id="formbulk">
         <table class="table table-bordered" style="margin-bottom: 10px" style="width:100%">
             <tr>
-                <th style="width: 10px;"><input type="checkbox" name="selectall" /></th>
-                <th>No</th>
+            <?php if(!$this->ion_auth->in_group(32)) :?>
+            <?php endif ?>
+       
+        <th>No</th>
 		<th>Nama Barang</th>
 		<th>Harga Barang</th>
 		<th>Stok Barang</th>
+        <?php if(!$this->ion_auth->in_group(32)) :?>
 		<th>Action</th>
+        <?php endif ?>
             </tr><?php
             foreach ($barang_data as $barang)
             {
                 ?>
                 <tr>
-                
-		<td  style="width: 10px;padding-left: 8px;"><input type="checkbox" name="id" value="<?= $barang->id_barang;?>" />&nbsp;</td>
-                
+                <?php if(!$this->ion_auth->in_group(32)) :?>
+
+		
+<?php endif ?>
 			<td width="80px"><?php echo ++$start ?></td>
 			<td><?php echo $barang->nama_barang ?></td>
 			<td><?php echo $barang->harga_barang ?></td>
 			<td><?php echo $barang->stok_barang ?></td>
+            <?php if(!$this->ion_auth->in_group(32)) :?>
 			<td style="text-align:center" width="200px">
 				<?php 
 				echo anchor(site_url('barang/read/'.$barang->id_barang),'<i class="fa fa-search"></i>', 'class="btn btn-xs btn-primary"  data-toggle="tooltip" title="Detail"'); 
@@ -72,6 +82,7 @@
 				echo anchor(site_url('barang/delete/'.$barang->id_barang),' <i class="fa fa-trash"></i>','class="btn btn-xs btn-danger" onclick="javasciprt: return confirmdelete(\'barang/delete/'.$barang->id_barang.'\')"  data-toggle="tooltip" title="Delete" '); 
 				?>
 			</td>
+            <?php endif ?>
 		</tr>
                 <?php
             }
@@ -79,7 +90,8 @@
         </table>
          <div class="row" style="margin-bottom: 10px;">
             <div class="col-md-12">
-                <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i> Hapus Data Terpilih</button> <a href="#" class="btn bg-yellow">Total Record : <?php echo $total_rows ?></a>
+            <?php if(!$this->ion_auth->in_group(32)) :?>
+                <?php endif ?> <a href="#" class="btn bg-yellow">Total Record : <?php echo $total_rows ?></a>
             </div>
         </div>
         </form>

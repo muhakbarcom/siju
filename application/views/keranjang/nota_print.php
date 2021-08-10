@@ -1,7 +1,8 @@
+<link rel="stylesheet" href="<?= base_url(); ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
 <div>
     <div><center>TOKO FADJAR COY<br>
 Menjual bahan & peralatan tani<br>
-Jl.Agussalim n0.37 Padangsidimpuan</center>
+Jl.Agussalim no.37 Padangsidimpuan</center>
 </div>
     <div>
         <table class="table">

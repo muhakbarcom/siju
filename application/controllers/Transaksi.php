@@ -33,9 +33,16 @@ class Transaksi extends CI_Controller
 
         $config['per_page'] = 10;
         $config['page_query_string'] = TRUE;
-        $config['total_rows'] = $this->Transaksi_model->total_rows($q);
-        $transaksi = $this->Transaksi_model->get_limit_data($config['per_page'], $start, $q);
-
+       
+        $dari =  $this->input->post('dari');
+        $sampai = $this->input->post('sampai');
+        if ($dari) {
+            $config['total_rows'] = $this->Transaksi_model->total_rows_trx($q,$dari,$sampai);
+            $transaksi = $this->Transaksi_model->get_limit_data_trx($config['per_page'], $start, $q, $dari, $sampai);
+        } else {
+            $config['total_rows'] = $this->Transaksi_model->total_rows($q);
+            $transaksi = $this->Transaksi_model->get_limit_data($config['per_page'], $start, $q);
+        }
         $this->load->library('pagination');
         $this->pagination->initialize($config);
 
@@ -140,8 +147,8 @@ class Transaksi extends CI_Controller
             'Dashboard' => '',
         ];
 
-        $data['page'] = 'keranjang/nota_print';
-        $this->load->view('template/backend', $data);
+       
+        $this->load->view('keranjang/nota_print', $data);
     }
     
     public function create_action()
@@ -160,7 +167,7 @@ class Transaksi extends CI_Controller
                 // 'tgl_pengembalian' => $this->input->post('tgl_pengembalian', TRUE),
                 // 'denda' => $this->input->post('denda', TRUE),
                 'total_bayar' => $keranjang_row->total,
-                
+                'status' => 'sudah dibayar',
             );
             $insert_id = $this->Transaksi_model->insert($data);
 

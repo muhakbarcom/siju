@@ -1,7 +1,8 @@
 <div class="box">
     <div class="box-header"><center>TOKO FADJAR COY<br>
 Menjual bahan & peralatan tani<br>
-Jl.Agussalim n0.37 Padangsidimpuan</center>
+Jl.Agussalim no.37 Padangsidimpuan<br>
+No hp: 082287209796</center>
 </div>
     <div class="box-body">
         <table class="table">

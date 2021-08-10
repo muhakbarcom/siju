@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 18 Jul 2021 pada 09.15
+-- Waktu pembuatan: 10 Agu 2021 pada 05.43
 -- Versi server: 10.4.17-MariaDB
 -- Versi PHP: 8.0.2
 
@@ -59,21 +59,21 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga_barang`, `stok_barang`) VALUES
-(2, 'Roundup 1L', 85000, 20),
-(3, 'Pupuk Urea', 200000, 50),
-(4, 'Curacron 100ml', 30000, 70),
-(5, 'Bablas 1L', 65000, 25),
-(6, 'Pupuk Amaphos', 450000, 4),
-(7, 'Marshal', 30000, 75),
-(8, 'Sidafos', 75000, 27),
-(9, 'Dafat', 23000, 130),
-(10, 'Astertin', 17000, 50),
-(11, 'Decis', 16000, 40),
+(2, 'Roundup 1L', 85000, 16),
+(3, 'Pupuk Urea', 200000, 46),
+(4, 'Curacron 100ml', 30000, 66),
+(5, 'Bablas 1L', 65000, 21),
+(6, 'Pupuk Amaphos', 450000, 0),
+(7, 'Marshal', 30000, 74),
+(8, 'Sidafos', 75000, 24),
+(9, 'Dafat', 23000, 125),
+(10, 'Astertin', 17000, 45),
+(11, 'Decis', 16000, 39),
 (12, 'Supremo', 65000, 100),
-(13, 'Supretox', 65000, 120),
-(14, 'Mr. quat', 60000, 80),
-(15, 'Bionasa', 70000, 40),
-(16, 'Dangke', 25000, 130);
+(13, 'Supretox', 65000, 119),
+(14, 'Mr. quat', 60000, 78),
+(15, 'Bionasa', 70000, 34),
+(16, 'Dangke', 25000, 126);
 
 -- --------------------------------------------------------
 
@@ -116,7 +116,49 @@ INSERT INTO `detail_transaksi` (`id_barang`, `id_transaksi`, `id_dtl_transaksi`,
 (16, '17', 20, 4, 100000),
 (4, '17', 21, 3, 90000),
 (9, '17', 22, 1, 23000),
-(6, '18', 23, 1, 450000);
+(6, '18', 23, 1, 450000),
+(9, '19', 24, 1, 23000),
+(16, '21', 26, 3, 75000),
+(11, '22', 27, 1, 16000),
+(8, '22', 28, 2, 150000),
+(15, '23', 29, 1, 70000),
+(14, '24', 30, 2, 120000),
+(10, '25', 31, 2, 34000),
+(9, '25', 32, 3, 69000),
+(7, '25', 33, 1, 30000),
+(6, '25', 34, 1, 450000),
+(5, '25', 35, 4, 260000),
+(4, '25', 36, 1, 30000),
+(3, '25', 37, 2, 400000),
+(2, '25', 38, 1, 85000),
+(15, '26', 39, 1, 70000),
+(2, '27', 40, 2, 170000),
+(4, '27', 41, 1, 30000),
+(6, '27', 42, 3, 1350000),
+(2, '28', 43, 1, 85000),
+(9, '28', 44, 2, 46000),
+(4, '28', 45, 2, 60000),
+(16, '29', 46, 1, 25000),
+(13, '29', 47, 1, 65000),
+(10, '29', 48, 2, 34000),
+(10, '30', 49, 1, 17000),
+(3, '30', 50, 2, 400000),
+(15, '31', 51, 3, 210000),
+(8, '31', 52, 1, 75000),
+(15, '32', 53, 1, 70000);
+
+--
+-- Trigger `detail_transaksi`
+--
+DELIMITER $$
+CREATE TRIGGER `Stok` AFTER INSERT ON `detail_transaksi` FOR EACH ROW BEGIN
+UPDATE barang
+SET stok_barang= stok_barang-new.quantity
+WHERE id_barang= new.id_barang
+;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -221,8 +263,6 @@ INSERT INTO `groups_menu` (`id_groups`, `id_menu`) VALUES
 (29, 125),
 (1, 127),
 (2, 127),
-(1, 119),
-(32, 119),
 (1, 3),
 (32, 3),
 (1, 1),
@@ -309,7 +349,9 @@ INSERT INTO `groups_menu` (`id_groups`, `id_menu`) VALUES
 (32, 116),
 (1, 120),
 (1, 117),
-(2, 117);
+(2, 117),
+(1, 119),
+(32, 119);
 
 -- --------------------------------------------------------
 
@@ -430,7 +472,7 @@ INSERT INTO `menu` (`id_menu`, `sort`, `level`, `parent_id`, `icon`, `label`, `l
 (92, 2, 1, 0, 'empty', 'MASTER DATA', '#', 'masterdata', 1),
 (116, 3, 2, 92, 'fas fa-plus-square', 'Kelola Data Barang', 'barang', 'jksj', 1),
 (117, 5, 2, 92, 'far fa-calendar-alt', 'Riwayat Pesanan', 'transaksi', 'jwehfu', 1),
-(119, 6, 2, 92, 'fas fa-chart-bar', 'Laporan Penjualan', 'laporan/penj', 'popy', 1),
+(119, 6, 2, 92, 'fas fa-chart-bar', 'Laporan Penjualan', 'view_penjualan', 'popy', 1),
 (120, 4, 2, 92, 'fas fa-list', 'Kelola Daftar Pesanan', 'transaksi/create', '#', 1);
 
 -- --------------------------------------------------------
@@ -480,30 +522,45 @@ INSERT INTO `setting` (`id`, `kode`, `nama`, `nilai`) VALUES
 CREATE TABLE `transaksi` (
   `id_transaksi` int(11) NOT NULL,
   `total_bayar` int(11) NOT NULL,
-  `tanggal_transaksi` date NOT NULL
+  `tanggal_transaksi` date NOT NULL,
+  `status` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `transaksi`
 --
 
-INSERT INTO `transaksi` (`id_transaksi`, `total_bayar`, `tanggal_transaksi`) VALUES
-(1, 900000, '2021-07-13'),
-(2, 85000, '2021-07-12'),
-(5, 260000, '2021-07-09'),
-(6, 530000, '2021-07-16'),
-(7, 1880000, '2021-07-16'),
-(8, 170000, '2021-07-16'),
-(9, 1170000, '2021-07-16'),
-(10, 200000, '2021-07-16'),
-(11, 1445000, '2021-07-18'),
-(12, 46000, '2021-07-18'),
-(13, 130000, '2021-07-18'),
-(14, 450000, '2021-07-18'),
-(15, 450000, '2021-07-18'),
-(16, 23000, '2021-07-18'),
-(17, 213000, '2021-07-18'),
-(18, 450000, '2021-07-18');
+INSERT INTO `transaksi` (`id_transaksi`, `total_bayar`, `tanggal_transaksi`, `status`) VALUES
+(1, 900000, '2021-07-13', 'sudah dibayar'),
+(2, 85000, '2021-07-12', 'sudah dibayar'),
+(5, 260000, '2021-07-09', 'sudah dibayar'),
+(6, 530000, '2021-07-16', 'sudah dibayar'),
+(7, 1880000, '2021-07-16', 'sudah dibayar'),
+(8, 170000, '2021-07-16', 'sudah dibayar'),
+(9, 1170000, '2021-07-16', 'sudah dibayar'),
+(10, 200000, '2021-07-16', 'sudah dibayar'),
+(11, 1445000, '2021-07-18', 'sudah dibayar'),
+(12, 46000, '2021-07-18', 'sudah dibayar'),
+(13, 130000, '2021-07-18', 'sudah dibayar'),
+(14, 450000, '2021-07-18', 'sudah dibayar'),
+(15, 450000, '2021-07-18', 'sudah dibayar'),
+(16, 23000, '2021-07-18', 'sudah dibayar'),
+(17, 213000, '2021-07-18', 'sudah dibayar'),
+(18, 450000, '2021-07-18', 'sudah dibayar'),
+(19, 23000, '2021-07-18', 'sudah dibayar'),
+(20, 75000, '2021-07-18', 'sudah dibayar'),
+(21, 75000, '2021-07-18', 'sudah dibayar'),
+(22, 166000, '2021-07-18', 'sudah dibayar'),
+(23, 70000, '2021-07-18', 'sudah dibayar'),
+(24, 120000, '2021-07-18', 'sudah dibayar'),
+(25, 1358000, '2021-07-18', 'sudah dibayar'),
+(26, 70000, '2021-07-18', 'sudah dibayar'),
+(27, 1550000, '2021-07-19', 'sudah dibayar'),
+(28, 191000, '2021-07-26', 'sudah dibayar'),
+(29, 124000, '2021-07-31', 'sudah dibayar'),
+(30, 417000, '2021-08-03', 'sudah dibayar'),
+(31, 285000, '2021-08-10', 'sudah dibayar'),
+(32, 70000, '2021-08-10', 'sudah dibayar');
 
 -- --------------------------------------------------------
 
@@ -537,8 +594,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`, `image`) VALUES
-(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@kasir.com', '', 'm0vyKu2zW7L8PTG20bquF.707e055aeea8a30aca', 1541329145, 'WcHCQ5vcXwT1z99BvJUWnu', 1268889823, 1626586874, 1, 'Admin', 'Kasir', 'ADMIN', '0', 'WhatsApp_Image_2021-06-16_at_16_13_26.jpg'),
-(12, '::1', 'ilfahrifany02@gmail.com', '$2y$08$MjxDCY4TV8dI0j/PTn.bJu30jlcpjNyuLZKHHrGOJX.grARWbsGlC', NULL, 'ilfahrifany02@gmail.com', NULL, NULL, NULL, NULL, 1623827706, 1626449662, 1, 'Owner', 'Pemilik', 'Toko Fadjar Coy', '082210845917', 'owner.jpg');
+(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@kasir.com', '', 'm0vyKu2zW7L8PTG20bquF.707e055aeea8a30aca', 1541329145, 'WcHCQ5vcXwT1z99BvJUWnu', 1268889823, 1628564491, 1, 'Admin', 'Kasir', 'ADMIN', '0', 'WhatsApp_Image_2021-06-16_at_16_13_26.jpg'),
+(12, '::1', 'ilfahrifany02@gmail.com', '$2y$08$MjxDCY4TV8dI0j/PTn.bJu30jlcpjNyuLZKHHrGOJX.grARWbsGlC', NULL, 'ilfahrifany02@gmail.com', NULL, NULL, NULL, NULL, 1623827706, 1628563726, 1, 'Owner', 'Pemilik', 'Toko Fadjar Coy', '082210845917', 'owner.jpg');
 
 -- --------------------------------------------------------
 
@@ -595,6 +652,26 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (63, 38, 2),
 (88, 39, 31),
 (89, 40, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in struktur untuk tampilan `view_penjualan`
+-- (Lihat di bawah untuk tampilan aktual)
+--
+CREATE TABLE `view_penjualan` (
+`tanggal_transaksi` date
+,`total_pendapatan` decimal(32,0)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur untuk view `view_penjualan`
+--
+DROP TABLE IF EXISTS `view_penjualan`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_penjualan`  AS  (select `transaksi`.`tanggal_transaksi` AS `tanggal_transaksi`,sum(`transaksi`.`total_bayar`) AS `total_pendapatan` from `transaksi` where `transaksi`.`status` = 'sudah dibayar' group by `transaksi`.`tanggal_transaksi` order by `transaksi`.`tanggal_transaksi` desc) ;
 
 --
 -- Indexes for dumped tables
@@ -715,7 +792,7 @@ ALTER TABLE `barang`
 -- AUTO_INCREMENT untuk tabel `detail_transaksi`
 --
 ALTER TABLE `detail_transaksi`
-  MODIFY `id_dtl_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_dtl_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT untuk tabel `frontend_menu`
@@ -733,7 +810,7 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT untuk tabel `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT untuk tabel `list_session_token`
@@ -745,7 +822,7 @@ ALTER TABLE `list_session_token`
 -- AUTO_INCREMENT untuk tabel `login_attempts`
 --
 ALTER TABLE `login_attempts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT untuk tabel `mahasiswa`
@@ -775,7 +852,7 @@ ALTER TABLE `setting`
 -- AUTO_INCREMENT untuk tabel `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
