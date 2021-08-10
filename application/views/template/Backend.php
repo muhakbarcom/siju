@@ -18,6 +18,10 @@ $setting_aplikasi = $this->db->get('setting')->row();
 
   <!-- Font Awesome -->
 
+  <!-- CSS Datepicker -->
+  <link rel="stylesheet" href="<?= base_url(); ?>assets/date_picker/bootstrap-datepicker.min.css">
+  <link rel="stylesheet" href="<?= base_url(); ?>assets/date_picker/bootstrap-datetimepicker.min.css">
+
   <link rel="stylesheet" href="<?= base_url(); ?>assets/bower_components/font-awesome/css/font-awesome.css">
   <link rel="stylesheet" href="<?= base_url(); ?>assets/bower_components/fontawesome/css/all.css">
   <!-- Ionicons -->
@@ -70,6 +74,7 @@ $setting_aplikasi = $this->db->get('setting')->row();
   <script src="<?= base_url(); ?>assets/bower_components/select2/dist/js/select2.full.min.js"></script>
 
   <!-- mask -->
+  <script src="<?= base_url(); ?>assets/date_picker/bootstrap-datepicker.min.js"></script>
   <script src="<?= base_url(); ?>assets/dist/js/jquery.mask.min.js"></script>
   <style type="text/css">
     .pagination>li>a,
@@ -272,13 +277,13 @@ $setting_aplikasi = $this->db->get('setting')->row();
     <!-- /.content-wrapper -->
 
     <footer class="main-footer">
-       <div class="pull-right hidden-xs">
+      <div class="pull-right hidden-xs">
         <b>Developed by<a href="https://ilfah.com"> Ilfah Rifany </b></a>
       </div>
       <strong>Copyright &copy; <?= date('Y'); ?> <a href="https://ilfah.com"> ilfahrifanyy </a>.</strong> All rights
       reserved.
       <!-- copyright -->
-          </footer>
+    </footer>
 
   </div>
   <!-- ./wrapper -->
@@ -287,6 +292,29 @@ $setting_aplikasi = $this->db->get('setting')->row();
   <script src="<?= base_url('/assets/dist/js/'); ?>sweetalert2.all.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script>
+    $('.formdate2').datepicker({
+      format: "yyyy-mm-dd",
+      autoclose: true,
+      weekStart: 1,
+      todayBtn: 1,
+      // autoclose: 1,
+      todayHighlight: 1,
+      startView: 0,
+      forceParse: 0,
+      showMeridian: 1
+    });
+
+    $('.formdate').datepicker({
+      format: "yyyy-mm-dd",
+      autoclose: true,
+      weekStart: 1,
+      todayBtn: 1,
+      // autoclose: 1,
+      todayHighlight: 1,
+      startView: 0,
+      forceParse: 0,
+      showMeridian: 1
+    });
     $(document).ready(function() {
       $('.sidebar-menu').tree()
     })
