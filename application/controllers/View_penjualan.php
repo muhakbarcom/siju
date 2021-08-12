@@ -30,9 +30,16 @@ class View_penjualan extends CI_Controller
 
         $config['per_page'] = 10;
         $config['page_query_string'] = TRUE;
-        $config['total_rows'] = $this->View_penjualan_model->total_rows($q);
-        $view_penjualan = $this->View_penjualan_model->get_limit_data($config['per_page'], $start, $q);
-
+        
+        $dari =  $this->input->post('dari');
+        $sampai = $this->input->post('sampai');
+        if ($dari) {
+            $config['total_rows'] = $this->View_penjualan_model->total_rows_laporan($q,$dari,$sampai);
+            $view_penjualan = $this->View_penjualan_model->get_limit_data_laporan($config['per_page'], $start, $q,$dari,$sampai);
+        } else {
+            $config['total_rows'] = $this->View_penjualan_model->total_rows($q);
+            $view_penjualan = $this->View_penjualan_model->get_limit_data($config['per_page'], $start, $q);
+        }
         $this->load->library('pagination');
         $this->pagination->initialize($config);
 

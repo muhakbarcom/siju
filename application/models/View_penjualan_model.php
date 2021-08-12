@@ -45,6 +45,24 @@ class View_penjualan_model extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+    function total_rows_laporan($q = NULL, $dari, $sampai) {
+        $this->db->where('tanggal_transaksi >=', $dari);
+        $this->db->where('tanggal_transaksi <=', $sampai);
+        $this->db->from($this->table);
+            return $this->db->count_all_results();
+        }
+    
+        // get data with limit and search
+        function get_limit_data_laporan($limit, $start = 0, $q = NULL, $dari, $sampai) {
+            $this->db->where('tanggal_transaksi >=', $dari);
+            $this->db->where('tanggal_transaksi <=', $sampai);
+            $this->db->order_by($this->id, $this->order);
+            
+            
+        $this->db->limit($limit, $start);
+            return $this->db->get($this->table)->result();
+        }
+
     // insert data
     function insert($data)
     {

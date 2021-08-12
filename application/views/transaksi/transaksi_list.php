@@ -47,12 +47,12 @@
                         <div class="col input-group">
                             <!-- <label><b>Filter :</b></label> -->
                             <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-calendar"></i></button></span>
-                            <input type="text" class="form-control formdate2" name="dari" id="DariTanggal" required="true" placeholder="Dari Bulan">
+                            <input type="text" class="form-control formdate2" name="dari" id="DariTanggal" required="true" placeholder="Dari Tanggal">
                         </div>
                         <div class="col input-group">
                             <span class="input-group-addon" id="sizing-addon1">
                                 <i class="fas fa-chevron-right"></i></span>
-                            <input type="text" class="form-control formdate2" name="sampai" id="SampaiTanggal" required="true" placeholder="Sampai Bulan">
+                            <input type="text" class="form-control formdate2" name="sampai" id="SampaiTanggal" required="true" placeholder="Sampai Tanggal">
                         </div>
                         <div class="col input-group">
                             <button type="submit" class="btn btn-primary"> <i class="fas fa-check-circle"></i> Submit</button>
